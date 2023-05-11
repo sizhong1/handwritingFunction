@@ -126,3 +126,17 @@ Promsie.then((res) => {
 }, (err) => {
     console.log(`Promise err4: ${err}`);
 })
+
+
+const P = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('success')
+        reject('error')
+    }, 1000)
+})
+
+P.then(null, (err) => { }).then((data) => { console.log(data + `138`); })
+
+setTimeout(() => {
+    console.log('setTimeout');
+}, 1000)
