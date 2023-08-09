@@ -227,4 +227,56 @@ function superEggDrop(k: number, n: number): number {
     return m
 }
 
-console.log(superEggDrop(3, 14));
+// console.log(superEggDrop(3, 14));
+
+/**
+ * 给定长度为n的字符串S进行 c 次操作，每次操作将SI到S复制到字符串尾。全部操作结束后有 次询问，每次询问字符串s的第k位。
+ * 1<n < 2.105,1<c< 40,1< g104.11018,1 < k< 1018
+ * 数据保证r不超过当前字符串长度，k 不超过最终字符串长度。
+ */
+
+
+// 正确程度未知
+// function getStr(s: string, c: number, r: number, k: number): string {
+//     let str = s
+//     while (c--) {
+//         str += str.slice(0, r)
+//     }
+//     return str[k - 1]
+// }
+
+// console.log(getStr('abc', 2, 1, 4));
+
+
+
+
+/**
+ * 现给定一个函数 fn ，返回该函数的一个 记忆化 版本。
+
+一个 记忆化 的函数是一个函数，它不会被相同的输入调用两次。而是会返回一个缓存的值。
+
+函数 fn 可以是任何函数，对它所接受的值类型没有任何限制。如果两个输入值在 JavaScript 中使用 === 运算符比较时相等，则它们被视为相同。
+ */
+
+type Fn = (...params: any) => any
+
+function memoize(fn: Fn): Fn {
+    const argMap = new Map();
+    const argsMap = new Map();
+    let id: number = 0;
+    return function (...args) {
+        let key = ""
+        for (let item of args) {
+            if (!argMap.has(item)) argMap.set(item, id++);
+            key += argMap.get(item) + "-";
+        }
+        if (argsMap.has(key)) {
+            return argsMap.get(key);
+        } else {
+            const res = fn(...args);
+            argsMap.set(key, res);
+            return res;
+        }
+    }
+}
+
